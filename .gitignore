@@ -1,0 +1,9 @@
+venv
+*.pyc
+*.pid
+.idea
+db.sqlite3
+local_settings.py
+uwsgi.ini
+storage/*
+log
