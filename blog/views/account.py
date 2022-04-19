@@ -2,7 +2,7 @@ from django_filters import rest_framework as filters
 from blog.models.account import MSAccount
 from common.views.mixins import BaseRestfulMixin
 from blog.serializers.account import AccountLoginSerializer, AccountSerializer, AccountManageResetPasswordSerializer
-from blog.views.base import BaseAPIView, SuperUserActionView
+from blog.views.base import BaseAPIView, SuperUserActionView, BaseRestfulActionsView, NoLoginRestfulView
 
 
 class LoginView(BaseRestfulMixin, BaseAPIView):
@@ -11,7 +11,7 @@ class LoginView(BaseRestfulMixin, BaseAPIView):
     http_method_names = ['post']
 
 
-class AccountManageView(SuperUserActionView):
+class AccountManageView(NoLoginRestfulView):
     class Filter(filters.FilterSet):
         class Meta:
             model = MSAccount

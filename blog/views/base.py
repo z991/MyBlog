@@ -12,7 +12,6 @@ from blog.auth.permission import UserPermission, SuperUserPermission, ShopAccoun
     ShopAccountActionPermission
 
 
-
 class BaseAPIView(mixins.GeneralCodeMixin, mixins.BaseAPIViewMixin, LogApiView):
     authentication_classes = [UserTokenAuthentication]
 
@@ -71,6 +70,10 @@ class BaseDownloadView(BaseDownloadMixin, BaseRestfulView):
 class BaseExportExcelView(BaseExcelComposeMixin, BaseDownloadView):
     def download(self, queryset):
         return self.create_excel(queryset)
+
+
+class NoLoginRestfulView(BaseRestfulActionsView):
+    permission_classes = []
 
 
 class SuperUserView(BaseRestfulView):

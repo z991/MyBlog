@@ -1,6 +1,8 @@
 import re
 
 from django.core.exceptions import ValidationError
+
+from blog.models.account import MSAccount
 from common.helper import is_phone_number
 
 
@@ -40,6 +42,10 @@ class PositiveNumericValidator:
 class UsernameValidator:
     def __call__(self, value):
         max_len = 30
+
+        if MSAccount.objects.filter(username=value).exists():
+            raise ValidationError("账号不可重复注册")
+
         if len(value) > max_len:
             raise ValidationError('账号最大长度不能超过{}个字符'.format(max_len))
         AlphaNumericValidator()(value)

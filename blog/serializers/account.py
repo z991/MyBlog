@@ -39,7 +39,6 @@ class AccountSerializer(BaseModelSerializer):
                 raise serializers.ValidationError('两次输入的密码不一致')
         return super().validate(attrs)
 
-
     @atomic
     def create(self, validated_data):
         password = validated_data.pop('init_password')
